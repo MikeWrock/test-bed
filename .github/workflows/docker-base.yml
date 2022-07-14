@@ -32,12 +32,14 @@ jobs:
       - name: Any changed
         if: steps.changed-files.outputs.any_changed == 'true'
         run: echo ${{ steps.changed-files.outputs.other_changed_files }}
-        run: echo ${{ steps.changed-files.outputs.all_modified_files }}
+      - name: Any changed
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: echo ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Any unchanged
         if: steps.changed-files.outputs.any_changed != 'true'
         run: echo ${{ steps.changed-files.outputs.other_changed_files }}
-        run: echo ${{ steps.changed-files.outputs.all_modified_files }}
+      - name: Any unchanged
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: echo ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Set up Docker Buildx
         if: steps.changed-files.outputs.any_changed == 'true'
