@@ -21,6 +21,10 @@ jobs:
     env:
       GH_IMAGE: ghcr.io/mikewrock/test-bed:latest
       PUSH: ${{ (github.event_name != 'pull_request') && (github.repository == 'mikewrock/test-bed') }}
+      PUSHA: ${{ (github.event_name != 'pull_request') }}
+      PUSHB: ${{ (github.repository == 'mikewrock/test-bed') }}
+      PUSHAA: ${{ github.event_name }}
+      PUSHBB: ${{ github.repository }}
     steps:
       - name: Say Hello
         run: echo hello
