@@ -1,11 +1,11 @@
 # syntax = docker/dockerfile:1.3
 
 ARG ROS_DISTRO=rolling
-ARG BASE_BRANCH=""
+ARG BASE_BRANCH=
 
 FROM scratch as base
 COPY hello /
-RUN echo $BASE_BRANCH
+RUN echo ${BASE_BRANCH}
 CMD ["/hello"]
 
 
