@@ -5,7 +5,7 @@ ARG BASE_BRANCH=
 
 FROM scratch as base
 COPY hello /
-RUN echo ${BASE_BRANCH}
+RUN touch ${BASE_BRANCH}
 CMD ["/hello"]
 
 
