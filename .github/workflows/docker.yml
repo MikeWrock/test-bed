@@ -1,0 +1,35 @@
+name: Build Docker Images
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - .docker/**
+      - '**.md'
+
+jobs:
+  say-hello:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    env:
+      GH_IMAGE: ghcr.io/mikewrock/test-bed:latest
+      PUSH: ${{ (github.event_name != 'pull_request') && (github.repository == 'mikewrock/test-bed') }}
+    steps:
+      - name: Say Hello
+        run: echo hello
+  call-docker-base:
+    uses: ./.github/workflows/docker-base.yml
+    secrets: inherit
+
+  call-docker-images:
+    needs:
+      - call-docker-base
+    uses: ./.github/workflows/docker-images.yml
+    secrets: inherit
