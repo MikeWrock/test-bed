@@ -7,6 +7,8 @@ jobs:
   build-base:
     strategy:
       fail-fast: false
+      matrix:
+        ROS_DISTRO: [humble, rolling]
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -53,10 +55,24 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Push Base Image
         uses: docker/build-push-action@v3
-        if: steps.changed-files.outputs.any_changed == 'true' && env.PUSH == 'true'
+        if: steps.changed-files.outputs.any_changed == 'true' && env.PUSH == 'true' 
         with:
           file: .docker/Dockerfile
+          build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
+          target: base
           push: ${{ env.PUSH }}
           no-cache: false
           tags: |
             ${{ env.GH_IMAGE }}
+      - name: Build and Push PR Image
+        uses: docker/build-push-action@v3
+        if: steps.changed-files.outputs.any_changed == 'true' && env.PUSH == 'false' &&  github.event_name == 'pull_request'
+        with:
+          file: .docker/Dockerfile
+          build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
+          target: base
+          push: true
+          no-cache: false
+          tags: |
+            ${{ env.GH_IMAGE }}-PR-${{ github.head_ref }}
+
