@@ -53,7 +53,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Push Base Image
         uses: docker/build-push-action@v3
-        if: steps.changed-files.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.any_changed == 'true' && env.PUSH == 'true'
         with:
           file: .docker/Dockerfile
           push: ${{ env.PUSH }}
