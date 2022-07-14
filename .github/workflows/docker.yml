@@ -1,0 +1,26 @@
+name: Build Docker Images
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - .docker/**
+      - '**.md'
+
+jobs:
+  say-hello:
+    steps:
+      - name: Say Hello
+        run: echo hello
+  call-docker-base:
+    uses: ./.github/workflows/docker-base.yml
+    secrets: inherit
+
+  call-docker-images:
+    needs:
+      - call-docker-base
+    uses: ./.github/workflows/docker-images.yml
+    secrets: inherit
