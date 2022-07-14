@@ -7,8 +7,8 @@ on:
       - main
   pull_request:
     paths:
-      - '.docker/**'
-      - '**.md'
+      - ".docker/**"
+      - "**.md"
 
 jobs:
   say-hello:
