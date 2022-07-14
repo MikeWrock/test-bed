@@ -31,10 +31,16 @@ jobs:
             README.md
       - name: Any changed
         if: steps.changed-files.outputs.any_changed == 'true'
-        run: echo Changed
+        run: echo ${{ steps.changed-files.outputs.other_changed_files }}
+      - name: Any changed
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: echo ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Any unchanged
         if: steps.changed-files.outputs.any_changed != 'true'
-        run: echo Unhanged
+        run: echo ${{ steps.changed-files.outputs.other_changed_files }}
+      - name: Any unchanged
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Set up Docker Buildx
         if: steps.changed-files.outputs.any_changed == 'true'
         uses: docker/setup-buildx-action@v2
