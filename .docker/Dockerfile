@@ -12,3 +12,4 @@ FROM ghcr.io/mikewrock/test-bed:${ROS_DISTRO}${BASE_BRANCH} as hello_world_image
 
 
 COPY ignore /
+COPY another_file /
