@@ -14,7 +14,7 @@ jobs:
       packages: write
       contents: read
     env:
-      GH_IMAGE: ghcr.io/mikewrock/test-bed:latest
+      GH_IMAGE: ghcr.io/mikewrock/test-bed:${{ matrix.ROS_DISTRO }}
       PUSH: ${{ (github.event_name != 'pull_request') && (github.repository == 'mikewrock/test-bed') }}
 
     steps:
