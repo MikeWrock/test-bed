@@ -27,8 +27,8 @@ jobs:
         with:
           since_last_remote_commit: true
           files: |
-            .docker/**
-            doc/**.cpp
+            '.docker/**'
+           'doc/**.cpp'
       - name: Any changed
         if: steps.changed-files.outputs.any_changed == 'true'
         run: echo ${{ steps.changed-files.outputs.other_changed_files }}
