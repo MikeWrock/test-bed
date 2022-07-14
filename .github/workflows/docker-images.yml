@@ -7,6 +7,8 @@ jobs:
   build-images:
     strategy:
       fail-fast: false
+      matrix:
+        ROS_DISTRO: [humble, rolling]
     runs-on: ubuntu-latest
     permissions:
       packages: write
