@@ -27,7 +27,7 @@ jobs:
       PUSHBB: ${{ github.repository }}
     steps:
       - name: Say Hello
-        run: echo hello
+        run: echo hello-${{ github.head_ref }}
   call-docker-base:
     uses: ./.github/workflows/docker-base.yml
     secrets: inherit
